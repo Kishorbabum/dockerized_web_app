@@ -30,12 +30,12 @@ jobs:
     # Step 4: Build and tag the Docker image
     - name: Build Docker image
       run: |
-        docker build -t kishorbabum9/my-web-app:host .
+        docker build -t kishorbabum9/nodejs:host .
 
     # Step 5: Push the Docker image to Docker Hub
     - name: Push Docker image
       run: |
-        docker push kishorbabum9/my-web-app:host
+        docker push kishorbabum9/nodejs:host
 
   test:
     runs-on: ubuntu-latest
@@ -49,12 +49,12 @@ jobs:
     # Step 2: Pull the Docker image from Docker Hub
     - name: Pull Docker image
       run: |
-        docker pull kishorbabum9/my-web-app:host
+        docker pull kishorbabum9/nodejs:host
 
     # Step 3: Run the Docker container
     - name: Run container for testing
       run: |
-        docker run -d -p 4000:3000 kishorbabum9/my-web-app:host
+        docker run -d -p 4000:3000 kishorbabum9/nodejs:host
 
     # Step 4: Wait for the application to start
     - name: Wait for application to start
@@ -63,7 +63,7 @@ jobs:
     # Step 5: Check logs of the running container
     - name: Check logs
       run: |
-        docker logs $(docker ps -q --filter "ancestor=kishorbabum9/my-web-app:host")
+        docker logs $(docker ps -q --filter "ancestor=kishorbabum9/nodejs:host")
 
     # Step 6: Test the application
     - name: Test application
